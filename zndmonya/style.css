@@ -1,295 +1,239 @@
 /* 
-  Ultimate UI/UX Design System 
-  Concept: Modern Minimalism, Glassmorphism, Fluidity
+  Theme: Neo-Pop & Raw 
+  Concept: Brutalism meets Kawaii. No more AI templates.
 */
 
 :root {
-  /* Color Palette - Light */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f5f5f7;
-  --text-primary: #1d1d1f;
-  --text-secondary: #86868b;
-  --accent-color: #0071e3;
-  --accent-hover: #0077ed;
-  --card-bg: rgba(255, 255, 255, 0.8);
-  --card-border: rgba(255, 255, 255, 0.4);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  --bg-color: #FFFCF0; /* 暖かいアイボリー */
+  --ink: #111111;      /* 真っ黒じゃない黒 */
   
-  /* Layout */
-  --max-width: 980px;
-  --header-height: 60px;
-  --radius-lg: 24px;
-  --radius-md: 16px;
-  --radius-sm: 8px;
+  --color-accent-1: #FFD43B; /* ポップな黄色 */
+  --color-accent-2: #FF6B6B; /* 鮮やかな赤 */
+  --color-accent-3: #4DABF7; /* 空色 */
+  --color-accent-4: #69DB7C; /* 草色 */
+
+  --border-width: 3px;
+  --shadow-depth: 6px;
   
-  /* Animation */
-  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --radius: 16px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Color Palette - Dark */
-    --bg-primary: #000000;
-    --bg-secondary: #121212;
-    --text-primary: #f5f5f7;
-    --text-secondary: #86868b;
-    --accent-color: #2997ff;
-    --accent-hover: #47aaff;
-    --card-bg: rgba(28, 28, 30, 0.6);
-    --card-border: rgba(255, 255, 255, 0.1);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-  }
-}
-
-/* Base Reset & Typography */
+/* Base Reset */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
-  line-height: 1.5;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--bg-color);
+  color: var(--ink);
+  font-family: "Hiragino Maru Gothic ProN", "Mplus 1p", "Rounded Mplus 1c", sans-serif;
+  line-height: 1.6;
   overflow-x: hidden;
+  /* 紙のようなザラつきを追加 */
+  background-image: radial-gradient(#d0d0d0 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
-/* Background Effect */
-body::before {
-  content: '';
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 50% 50%, rgba(0, 113, 227, 0.03), transparent 60%);
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* Layout Containers */
+/* 
+  Container: 画面中央に寄せず、左右を大きく使う
+*/
 .container {
-  max-width: var(--max-width);
+  max-width: 900px;
   margin: 0 auto;
   padding: 0 24px;
+  position: relative;
 }
 
-/* Header */
+/* 
+  Navigation: "浮いている" アイランド型 
+  上部に固定せず、コンテンツの上にフワッと置く
+*/
 .site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--header-height);
-  background: rgba(var(--bg-primary), 0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--card-border);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.header-content {
+  margin-top: 40px;
+  margin-bottom: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  max-width: var(--max-width);
-  padding: 0 24px;
 }
 
 .brand {
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: var(--text-primary);
+  font-size: 2rem;
+  font-weight: 900;
   text-decoration: none;
-  letter-spacing: -0.02em;
+  color: var(--ink);
+  background: var(--color-accent-1);
+  padding: 8px 16px;
+  border: var(--border-width) solid var(--ink);
+  border-radius: 8px;
+  box-shadow: var(--shadow-depth) var(--shadow-depth) 0 var(--ink);
+  transition: transform 0.1s, box-shadow 0.1s;
+  transform: rotate(-2deg); /* 生意気に傾ける */
+}
+
+.brand:active {
+  transform: translate(2px, 2px) rotate(-2deg);
+  box-shadow: 2px 2px 0 var(--ink);
 }
 
 .nav-link {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+  font-weight: 800;
   text-decoration: none;
-  margin-left: 24px;
-  transition: color 0.2s var(--ease-smooth);
+  color: var(--ink);
+  font-size: 1.2rem;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
 }
 
 .nav-link:hover {
-  color: var(--accent-color);
-}
-
-/* Main Content */
-main {
-  padding-top: calc(var(--header-height) + 60px);
-  padding-bottom: 80px;
-  min-height: 100vh;
+  border-bottom: 3px solid var(--color-accent-2);
+  transform: translateY(-2px);
 }
 
 /* Typography */
 h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  margin-bottom: 24px;
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: clamp(3rem, 8vw, 5rem);
+  line-height: 1;
+  font-weight: 900;
+  margin-bottom: 32px;
+  letter-spacing: -0.04em;
+  text-shadow: 4px 4px 0 rgba(0,0,0,0.1);
 }
 
 h2 {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin: 48px 0 24px;
-  letter-spacing: -0.02em;
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 60px 0 32px;
+  display: inline-block;
+  background: white;
+  padding: 4px 12px;
+  border: var(--border-width) solid var(--ink);
+  box-shadow: 4px 4px 0 var(--color-accent-3);
+  transform: rotate(1deg);
 }
 
 p {
-  font-size: 1.05rem;
-  color: var(--text-secondary);
-  margin-bottom: 1.5em;
-  leading-trim: both;
-  text-edge: cap;
+  font-size: 1.2rem;
+  max-width: 600px;
+  font-weight: 500;
+  margin-bottom: 24px;
 }
 
-/* Cards */
+/* 
+  Card Grid: 自由な配置
+*/
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-  margin-top: 40px;
+  gap: 40px;
+  margin: 60px 0;
 }
 
-.glass-card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: var(--radius-lg);
+/* 
+  Pop Card: 太枠 + ハードシャドウ 
+*/
+.pop-card {
+  background: white;
+  border: var(--border-width) solid var(--ink);
+  border-radius: var(--radius);
   padding: 32px;
-  box-shadow: var(--glass-shadow);
-  transition: transform 0.4s var(--ease-spring), box-shadow 0.4s var(--ease-smooth);
   text-decoration: none;
+  color: var(--ink);
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow-depth) var(--shadow-depth) 0 var(--ink);
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
-.glass-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+.pop-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 10px 10px 0 var(--ink);
+  background: #fff; /* z-index対策 */
+  z-index: 10;
 }
 
-.card-icon {
-  width: 48px;
-  height: 48px;
-  background: var(--accent-color);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  color: white;
-  font-size: 24px;
+.pop-card:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+/* カードごとの個性（色分け） */
+.card-support { background-color: #e8fff0; }
+.card-privacy { background-color: #f0f7ff; }
+.card-terms   { background-color: #fff4e6; }
+
+.card-emoji {
+  font-size: 4rem;
+  margin-bottom: 16px;
+  line-height: 1;
+  filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.2));
 }
 
 .card-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 8px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .card-desc {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  margin-bottom: 0;
-}
-
-/* Document Styles (Privacy, Terms) */
-.document-content {
-  background: var(--card-bg);
-  padding: 48px;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--glass-shadow);
-}
-
-.document-content ul {
-  margin-bottom: 1.5em;
-  padding-left: 1.5em;
-  color: var(--text-secondary);
-}
-
-.document-content li {
-  margin-bottom: 0.5em;
-}
-
-.document-content a {
-  color: var(--accent-color);
-  text-decoration: none;
+  font-size: 1rem;
+  color: #444;
   font-weight: 500;
+  line-height: 1.5;
 }
 
-.document-content a:hover {
-  text-decoration: underline;
+/* Document Styles */
+.document-content {
+  background: white;
+  border: var(--border-width) solid var(--ink);
+  border-radius: var(--radius);
+  padding: 48px;
+  box-shadow: var(--shadow-depth) var(--shadow-depth) 0 var(--ink);
+}
+
+.document-content h2 {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  transform: none;
+  border-bottom: 3px solid var(--color-accent-1);
+  display: block;
+  width: 100%;
+  margin-top: 48px;
 }
 
 /* Footer */
 .site-footer {
-  text-align: center;
-  padding: 40px 0;
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  border-top: 1px solid var(--card-border);
-  margin-top: auto;
+  margin-top: 100px;
+  padding: 60px 0;
+  border-top: var(--border-width) solid var(--ink);
+  background: white;
 }
 
-.footer-links {
+.footer-content {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
   gap: 24px;
-  margin-bottom: 16px;
 }
 
-.footer-link {
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: color 0.2s;
+.copyright {
+  font-weight: 700;
+  font-size: 1.2rem;
 }
 
-.footer-link:hover {
-  color: var(--accent-color);
-}
-
-/* Utilities */
-.fade-in {
-  animation: fadeIn 0.8s var(--ease-smooth) forwards;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-
-/* Responsive */
+/* Mobile */
 @media (max-width: 768px) {
-  h1 { font-size: 2.2rem; }
+  h1 { font-size: 3.5rem; }
+  .site-header { margin-bottom: 40px; }
+  .card-grid { gap: 24px; }
+  .pop-card { box-shadow: 4px 4px 0 var(--ink); }
   .document-content { padding: 24px; }
-  .card-grid { grid-template-columns: 1fr; }
 }
-
