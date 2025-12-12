@@ -1,7 +1,5 @@
 {
-  "redirects": [
-    { "source": "/", "destination": "/support", "permanent": true }
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/$1" }
   ]
 }
-
-
