@@ -1,0 +1,7 @@
+{
+  "redirects": [
+    { "source": "/", "destination": "/support", "permanent": true }
+  ]
+}
+
+
