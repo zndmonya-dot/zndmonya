@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>zndmonya | Developer Portal</title>
-  <meta name="description" content="zndmonyaのアプリ開発ポータル。楽しく、便利に、使いやすく。">
+  <title>zndmonya | iOS Developer</title>
+  <meta name="description" content="zndmonyaの公式ポートフォリオサイト。開発アプリ一覧、サポート情報など。">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
 </head>
@@ -14,45 +14,89 @@
     <header class="header">
       <a href="/" class="brand">zndmonya</a>
       <nav class="nav">
+        <a href="#apps" class="nav-item">Apps</a>
+        <a href="#about" class="nav-item">About</a>
         <a href="/support" class="nav-item">Support</a>
       </nav>
     </header>
 
     <main>
-      <div class="hero">
-        <h1>Fresh & Useful Apps.</h1>
-        <p>日常に彩りを添える、シンプルで優しいiOSアプリを開発しています。</p>
-      </div>
+      <!-- Hero -->
+      <section class="hero">
+        <h1>Code with Green.<br>Create with Fun.</h1>
+        <p>日常に彩りを添える、シンプルで優しいiOSアプリを開発しています。<br>ずんだ餅のように、味わい深い体験を。</p>
+      </section>
 
-      <div class="grid">
-        <!-- Support -->
-        <a href="/support" class="card">
-          <div class="card-icon">🧩</div>
-          <div class="card-title">App Support</div>
-          <div class="card-desc">不具合の報告や、機能のご要望はこちらから。いつでもお待ちしています。</div>
-          <div class="card-arrow">詳しくみる</div>
-        </a>
+      <!-- Portfolio Section -->
+      <section id="apps">
+        <div class="section-title">Featured Apps</div>
+        <div class="app-grid">
+          
+          <!-- App 1: TrapFinder (Dummy) -->
+          <article class="app-card">
+            <div class="app-icon">🔍</div>
+            <h3 class="app-name">TrapFinder</h3>
+            <p class="app-desc">
+              日常に潜む「罠」を見つける、新感覚の探索アプリ。<br>
+              あなたの周りの見えないリスクを可視化します。
+            </p>
+            <a href="#" class="app-store-btn" onclick="return false;">
+              <svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 52.3-11.4 69.5-34.3z"/></svg>
+              App Store
+            </a>
+          </article>
 
-        <!-- Privacy -->
-        <a href="/privacy" class="card">
-          <div class="card-icon">🌿</div>
-          <div class="card-title">Privacy Policy</div>
-          <div class="card-desc">ユーザーデータの取り扱いについて。透明性のある運用をお約束します。</div>
-          <div class="card-arrow">読む</div>
-        </a>
+          <!-- App 2: Placeholder (Coming Soon) -->
+          <article class="app-card" style="justify-content: center; align-items: center; text-align: center; border: 2px dashed #ccc; box-shadow: none; background: transparent;">
+            <div style="font-size: 3rem; opacity: 0.3; margin-bottom: 16px;">🚀</div>
+            <h3 style="opacity: 0.5;">Next App</h3>
+            <p style="opacity: 0.5;">Under Development...</p>
+          </article>
 
-        <!-- Terms -->
-        <a href="/terms" class="card">
-          <div class="card-icon">📜</div>
-          <div class="card-title">Terms of Use</div>
-          <div class="card-desc">アプリを楽しく安全にご利用いただくためのお約束ごとです。</div>
-          <div class="card-arrow">読む</div>
-        </a>
-      </div>
+        </div>
+      </section>
+
+      <!-- Profile Section -->
+      <section id="about" class="profile-section">
+        <div class="profile-avatar">👨‍💻</div>
+        <div class="profile-content">
+          <h3>About Me</h3>
+          <p>
+            個人iOSデベロッパーとして活動中。<br>
+            使いやすさと「手触り感」を重視したUIデザインが得意です。<br>
+            開発日誌や技術メモはnoteで発信しています。
+          </p>
+          <div class="profile-links">
+            <a href="#" class="profile-link">Note</a>
+            <a href="#" class="profile-link">X (Twitter)</a>
+            <a href="#" class="profile-link">GitHub</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Information Section -->
+      <section>
+        <div class="section-title">Information</div>
+        <div class="info-grid">
+          <a href="/support" class="info-card">
+            <div class="info-title">🧩 App Support</div>
+            <div class="info-desc">不具合報告・お問い合わせはこちら</div>
+          </a>
+          <a href="/privacy" class="info-card">
+            <div class="info-title">🌿 Privacy Policy</div>
+            <div class="info-desc">個人情報の取り扱いについて</div>
+          </a>
+          <a href="/terms" class="info-card">
+            <div class="info-title">📜 Terms of Use</div>
+            <div class="info-desc">利用規約</div>
+          </a>
+        </div>
+      </section>
+
     </main>
 
     <footer class="footer">
-      <div>&copy; 2025 zndmonya</div>
+      <div>&copy; 2025 zndmonya. All rights reserved.</div>
     </footer>
   </div>
 
