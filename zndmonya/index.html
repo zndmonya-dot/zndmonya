@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>zndmonya</title>
-  <meta name="description" content="iOS Application Developer Portal">
+  <title>zndmonya | Developer Portal</title>
+  <meta name="description" content="zndmonyaのアプリ開発ポータル。楽しく、便利に、使いやすく。">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
 </head>
@@ -19,34 +19,36 @@
     </header>
 
     <main>
-      <h1>Designing Utility for iOS.</h1>
-      <p>ユーザーの生活に溶け込む、シンプルで使いやすいアプリケーションを開発しています。</p>
+      <div class="hero">
+        <h1>Fresh & Useful Apps.</h1>
+        <p>日常に彩りを添える、シンプルで優しいiOSアプリを開発しています。</p>
+      </div>
 
-      <div class="section-title">Menu</div>
-      
-      <ul class="link-list">
-        <li class="link-item">
-          <a href="/support">
-            <span class="link-title">App Support</span>
-            <span class="link-desc">お問い合わせ・不具合報告</span>
-            <span class="arrow">→</span>
-          </a>
-        </li>
-        <li class="link-item">
-          <a href="/privacy">
-            <span class="link-title">Privacy Policy</span>
-            <span class="link-desc">個人情報保護方針</span>
-            <span class="arrow">→</span>
-          </a>
-        </li>
-        <li class="link-item">
-          <a href="/terms">
-            <span class="link-title">Terms of Use</span>
-            <span class="link-desc">利用規約</span>
-            <span class="arrow">→</span>
-          </a>
-        </li>
-      </ul>
+      <div class="grid">
+        <!-- Support -->
+        <a href="/support" class="card">
+          <div class="card-icon">🧩</div>
+          <div class="card-title">App Support</div>
+          <div class="card-desc">不具合の報告や、機能のご要望はこちらから。いつでもお待ちしています。</div>
+          <div class="card-arrow">詳しくみる</div>
+        </a>
+
+        <!-- Privacy -->
+        <a href="/privacy" class="card">
+          <div class="card-icon">🌿</div>
+          <div class="card-title">Privacy Policy</div>
+          <div class="card-desc">ユーザーデータの取り扱いについて。透明性のある運用をお約束します。</div>
+          <div class="card-arrow">読む</div>
+        </a>
+
+        <!-- Terms -->
+        <a href="/terms" class="card">
+          <div class="card-icon">📜</div>
+          <div class="card-title">Terms of Use</div>
+          <div class="card-desc">アプリを楽しく安全にご利用いただくためのお約束ごとです。</div>
+          <div class="card-arrow">読む</div>
+        </a>
+      </div>
     </main>
 
     <footer class="footer">
