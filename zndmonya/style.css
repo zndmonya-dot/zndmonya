@@ -1,161 +1,167 @@
 /* 
-  Theme: Raw & Clean
-  Concept: Minimalist, Brutalist, Professional
+  Theme: Polished Minimal ✨
+  Concept: Apple-like, Glassmorphism, Sophisticated
 */
 
 :root {
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  --text-main: #111111;
-  --text-sub: #666666;
-  --bg-color: #ffffff;
-  --link-border: #e0e0e0;
+  --bg-color: #fbfbfd;
+  --text-main: #1d1d1f;
+  --text-sub: #86868b;
+  --accent: #0071e3; /* Apple Blue */
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --border: rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: var(--font-sans);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
   background-color: var(--bg-color);
   color: var(--text-main);
   line-height: 1.6;
-  font-size: 16px;
   -webkit-font-smoothing: antialiased;
 }
 
 .wrapper {
-  max-width: 600px; /* 狭めにして読みやすく */
+  max-width: 800px;
   margin: 0 auto;
-  padding: 120px 24px 60px; /* 上部を大きく空ける */
+  padding: 0 24px 80px;
 }
 
 /* Header */
 header {
-  margin-bottom: 80px;
+  padding: 40px 0;
+  margin-bottom: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .brand {
-  font-size: 16px;
   font-weight: 600;
-  display: block;
-  margin-bottom: 16px;
+  font-size: 1.2rem;
   text-decoration: none;
   color: var(--text-main);
+  letter-spacing: -0.02em;
 }
 
-.intro {
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 1.4;
-  color: var(--text-main);
+.hero {
+  text-align: center;
+  margin-bottom: 100px;
 }
-
-.intro span {
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #1d1d1f 0%, #434344 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero p {
+  font-size: 1.3rem;
   color: var(--text-sub);
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-/* List Layout (Works & Info) */
-section {
-  margin-bottom: 80px;
-}
+/* Sections */
+section { margin-bottom: 100px; }
 
 h2 {
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-sub);
-  margin-bottom: 24px;
-  font-weight: 500;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 40px;
+  letter-spacing: -0.02em;
 }
 
-.item-list {
-  list-style: none;
+/* Cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
 }
 
-.item {
-  margin-bottom: 32px;
-}
-
-.item-link {
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: var(--shadow);
   text-decoration: none;
   color: var(--text-main);
-  display: block;
-  group: hover;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
 }
 
-.item-title {
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 4px;
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.card-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  font-size: 2rem;
+  border: 1px solid rgba(0,0,0,0.05);
 }
 
-.item-title::after {
-  content: '↗';
-  font-size: 14px;
-  opacity: 0;
-  transform: translateX(-4px);
-  transition: all 0.2s;
-}
+.card-title { font-size: 1.4rem; font-weight: 600; margin-bottom: 8px; }
+.card-desc { font-size: 1rem; color: var(--text-sub); margin-bottom: 24px; flex-grow: 1; }
 
-.item-link:hover .item-title::after {
-  opacity: 1;
-  transform: translateX(0);
+.card-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
 }
+.card-link::after { content: '→'; margin-left: 6px; transition: margin 0.2s; }
+.card:hover .card-link::after { margin-left: 10px; }
 
-.item-desc {
-  font-size: 14px;
-  color: var(--text-sub);
-  line-height: 1.5;
+/* Simple List for Info */
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
+.info-item {
+  display: flex;
+  align-items: center;
+  padding: 24px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  text-decoration: none;
+  color: var(--text-main);
+  transition: background 0.2s;
+  border: 1px solid var(--border);
+}
+.info-item:hover { background: #fff; }
+.info-text { flex-grow: 1; font-weight: 500; }
+.info-arrow { color: var(--border); }
 
 /* Footer */
 footer {
-  font-size: 12px;
+  text-align: center;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
   color: var(--text-sub);
-  margin-top: 120px;
-  border-top: 1px solid #f0f0f0;
-  padding-top: 24px;
-  display: flex;
-  justify-content: space-between;
+  font-size: 0.85rem;
 }
 
-.social-links {
-  display: flex;
-  gap: 16px;
-}
-.social-links a {
-  color: var(--text-sub);
-  text-decoration: none;
-}
-.social-links a:hover {
-  color: var(--text-main);
-  text-decoration: underline;
-}
-
-/* Document Page Styles */
-.prose h1 {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 40px;
-}
-.prose h2 {
-  font-size: 16px;
-  color: var(--text-main);
-  margin: 40px 0 16px;
-  border-bottom: 1px solid #f0f0f0;
-  padding-bottom: 8px;
-  text-transform: none;
-  letter-spacing: 0;
-}
-.prose p, .prose li {
-  font-size: 15px;
-  color: #444;
-  margin-bottom: 16px;
-}
-.prose a {
-  color: var(--text-main);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
+/* Document Styles */
+.prose { max-width: 680px; margin: 0 auto; }
+.prose h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 40px; letter-spacing: -0.02em; }
+.prose h2 { font-size: 1.5rem; margin: 60px 0 20px; border-bottom: none; }
+.prose p, .prose li { color: var(--text-sub); font-size: 1.05rem; margin-bottom: 1.5em; }
+.prose a { color: var(--accent); text-decoration: none; }
+.prose a:hover { text-decoration: underline; }

@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>zndmonya</title>
-  <meta name="description" content="iOS / Web App Developer based in Japan.">
+  <meta name="description" content="iOS / Web App Developer.">
   <link rel="stylesheet" href="style.css">
-  <!-- アイコンはブラウザのデフォルト、またはあえて設定しないという手もあるが、白黒のシンプルなものは残す -->
   <link rel="icon" href="icon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -15,68 +14,59 @@
     
     <header>
       <a href="/" class="brand">zndmonya</a>
-      <p class="intro">
-        iOS & Web Application Developer.<br>
-        <span>Building simple, useful tools for daily life.</span>
-      </p>
     </header>
 
     <main>
-      
+      <div class="hero">
+        <h1>Simplicity is the<br>ultimate sophistication.</h1>
+        <p>シンプルさは究極の洗練。<br>使いやすさを追求したアプリケーションを開発しています。</p>
+      </div>
+
       <section>
         <h2>Applications</h2>
-        <ul class="item-list">
-          <!-- TrapFinder -->
-          <li class="item">
-            <a href="https://apps.apple.com/jp/app/trapfinder/id6756207736" target="_blank" rel="noopener noreferrer" class="item-link">
-              <div class="item-title">TrapFinder (iOS)</div>
-              <p class="item-desc">日常に潜む「罠」を可視化するAR探索ツール。</p>
-            </a>
-          </li>
+        <div class="card-grid">
           
+          <!-- TrapFinder -->
+          <a href="https://apps.apple.com/jp/app/trapfinder/id6756207736" target="_blank" rel="noopener noreferrer" class="card">
+            <div class="card-icon" style="background: #FDF8EC; color: #DC7B62; font-family: 'Arial Rounded MT Bold', sans-serif; font-weight: 800; font-size: 2.5rem;">T</div>
+            <h3 class="card-title">TrapFinder</h3>
+            <p class="card-desc">日常に潜む「罠」を可視化するAR探索ツール。</p>
+            <span class="card-link">View on App Store</span>
+          </a>
+
           <!-- Qiibrary -->
-          <li class="item">
-            <a href="https://qiibrary.com" target="_blank" rel="noopener noreferrer" class="item-link">
-              <div class="item-title">Qiibrary (Web)</div>
-              <p class="item-desc">開発者のための情報収集・管理プラットフォーム。</p>
-            </a>
-          </li>
-        </ul>
+          <a href="https://qiibrary.com" target="_blank" rel="noopener noreferrer" class="card">
+            <div class="card-icon" style="background: #f0f4f8; color: #55c500; font-family: sans-serif; font-weight: 800;">Q</div>
+            <h3 class="card-title">Qiibrary</h3>
+            <p class="card-desc">開発者のための情報収集プラットフォーム。</p>
+            <span class="card-link">Open Website</span>
+          </a>
+
+        </div>
       </section>
 
       <section>
         <h2>Information</h2>
-        <ul class="item-list">
-          <li class="item">
-            <a href="/support" class="item-link">
-              <div class="item-title">App Support</div>
-              <p class="item-desc">不具合報告・お問い合わせ</p>
-            </a>
-          </li>
-          <li class="item">
-            <a href="/privacy" class="item-link">
-              <div class="item-title">Privacy Policy</div>
-              <p class="item-desc">個人情報保護方針</p>
-            </a>
-          </li>
-          <li class="item">
-            <a href="/terms" class="item-link">
-              <div class="item-title">Terms of Use</div>
-              <p class="item-desc">利用規約</p>
-            </a>
-          </li>
-        </ul>
+        <div class="info-list">
+          <a href="/support" class="info-item">
+            <span class="info-text">App Support / お問い合わせ</span>
+            <span class="info-arrow">→</span>
+          </a>
+          <a href="/privacy" class="info-item">
+            <span class="info-text">Privacy Policy / プライバシーポリシー</span>
+            <span class="info-arrow">→</span>
+          </a>
+          <a href="/terms" class="info-item">
+            <span class="info-text">Terms of Use / 利用規約</span>
+            <span class="info-arrow">→</span>
+          </a>
+        </div>
       </section>
 
     </main>
 
     <footer>
-      <div class="copyright">© 2025 zndmonya</div>
-      <div class="social-links">
-        <a href="https://github.com" target="_blank">GitHub</a>
-        <a href="https://twitter.com" target="_blank">X (Twitter)</a>
-        <a href="https://note.com" target="_blank">Note</a>
-      </div>
+      © 2025 zndmonya
     </footer>
 
   </div>
