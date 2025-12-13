@@ -1,66 +1,54 @@
 <!DOCTYPE html>
-<html lang="ja" prefix="og: http://ogp.me/ns#">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Support | zndmonya</title>
-  
-  <meta property="og:title" content="Support | zndmonya">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="https://zndmonya.com/support">
-  
+  <title>App Support | zndmonya</title>
   <link rel="stylesheet" href="../style.css">
   <link rel="icon" href="../icon.svg" type="image/svg+xml">
-  <meta name="theme-color" content="#FFFCF0">
 </head>
 <body>
-
-  <div class="container">
-    <header class="site-header">
+  
+  <div class="wrapper">
+    <header class="header">
       <a href="/" class="brand">zndmonya</a>
-      <nav>
-        <a href="/" class="nav-link">Home 🏠</a>
+      <nav class="nav">
+        <a href="/" class="nav-item">Home</a>
       </nav>
     </header>
 
     <main>
-      <h1 style="text-align: center; margin-bottom: 60px;">Help Center 🚑</h1>
+      <h1>App Support</h1>
+      <p>アプリケーションに関するお問い合わせ、ご要望はこちらから受け付けております。</p>
+
+      <div class="section-title">Contact</div>
       
-      <div style="max-width: 600px; margin: 0 auto;">
-        <div class="pop-card card-support" style="text-align: center; align-items: center; margin-bottom: 60px; transform: rotate(1deg);">
-          <div class="card-emoji">📮</div>
-          <h2 style="margin: 0 0 16px; transform: none; box-shadow: none; border: none; background: none; font-size: 1.8rem;">Contact Me</h2>
-          <p style="margin-bottom: 32px;">
-            不具合報告、要望、ファンレター(?)<br>
-            なんでも送ってください。
-          </p>
-          <a href="mailto:zndmonya@gmail.com" style="background: var(--ink); color: white; padding: 16px 32px; border-radius: 99px; text-decoration: none; font-weight: 800; font-size: 1.2rem; display: inline-block; transition: transform 0.2s;">
-            zndmonya@gmail.com
-          </a>
-        </div>
+      <div class="prose">
+        <p>
+          <strong>Email</strong><br>
+          <a href="mailto:zndmonya@gmail.com">zndmonya@gmail.com</a>
+        </p>
+        <p style="font-size: 14px; color: var(--text-sub);">
+          ※ 通常24時間以内に返信いたします。<br>
+          ※ ドメイン指定受信設定等をご確認ください。
+        </p>
+      </div>
 
-        <h2 style="transform: rotate(-2deg); background: var(--color-accent-1); margin-bottom: 40px;">FAQ (よくある質問)</h2>
+      <div class="section-title">FAQ</div>
+      
+      <div class="prose">
+        <h2>アプリが起動しない場合</h2>
+        <p>App Storeより最新バージョンへのアップデートをお試しください。改善しない場合は、お使いの機種名とiOSのバージョンを添えて上記メールアドレスまでご連絡ください。</p>
         
-        <div class="pop-card" style="margin-bottom: 24px;">
-          <h3 style="font-weight: 800; font-size: 1.2rem; margin-bottom: 8px;">Q. アプリが落ちるんだけど？ 😡</h3>
-          <p style="margin: 0; font-size: 1rem;">A. すみません！App Storeで最新版にアップデートしてみてください。それでもダメなら機種名と一緒にメールください。すぐ直します。</p>
-        </div>
-
-        <div class="pop-card">
-          <h3 style="font-weight: 800; font-size: 1.2rem; margin-bottom: 8px;">Q. 返事がない... 😢</h3>
-          <p style="margin: 0; font-size: 1rem;">A. 24時間以内に返すようにしてます。迷惑メールに入ってないか確認してね。</p>
-        </div>
+        <h2>返信が届かない場合</h2>
+        <p>迷惑メールフォルダに振り分けられている可能性があります。設定をご確認ください。</p>
       </div>
     </main>
+
+    <footer class="footer">
+      <div>&copy; 2025 zndmonya</div>
+    </footer>
   </div>
-
-  <footer class="site-footer">
-    <div class="container footer-content">
-      <div class="copyright">© 2025 zndmonya.</div>
-    </div>
-  </footer>
-
-  <script src="../theme.js"></script>
 
 </body>
 </html>

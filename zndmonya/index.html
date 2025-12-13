@@ -1,78 +1,58 @@
 <!DOCTYPE html>
-<html lang="ja" prefix="og: http://ogp.me/ns#">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>zndmonya | Make it Pop.</title>
-  
-  <meta property="og:title" content="zndmonya | Make it Pop.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://zndmonya.com/">
-  <meta property="og:image" content="https://zndmonya.com/icon.svg">
-  
+  <title>zndmonya</title>
+  <meta name="description" content="iOS Application Developer Portal">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <meta name="theme-color" content="#FFFCF0">
 </head>
 <body>
   
-  <div class="container">
-    <header class="site-header">
+  <div class="wrapper">
+    <header class="header">
       <a href="/" class="brand">zndmonya</a>
-      <nav>
-        <a href="/support" class="nav-link">Contact 💌</a>
+      <nav class="nav">
+        <a href="/support" class="nav-item">Support</a>
       </nav>
     </header>
 
     <main>
-      <div style="margin: 80px 0 100px;">
-        <h1 style="transform: rotate(-1deg);">Make it<br><span style="color: var(--color-accent-2); background: #fff; padding: 0 10px; border: 3px solid black; box-shadow: 6px 6px 0 black; display:inline-block; transform: rotate(2deg);">Pop.</span></h1>
-        <p style="font-size: 1.5rem; line-height: 1.4; border-left: 6px solid var(--color-accent-1); padding-left: 20px;">
-          退屈なアプリは作りたくない。<br>
-          さわって楽しい、見てうれしい iOSアプリを。<br>
-          <span style="font-size: 1rem; color: #666; display: block; margin-top: 12px;">( Designed by zndmonya )</span>
-        </p>
-      </div>
+      <h1>Designing Utility for iOS.</h1>
+      <p>ユーザーの生活に溶け込む、シンプルで使いやすいアプリケーションを開発しています。</p>
 
-      <div class="card-grid">
-        <!-- Support Card -->
-        <a href="/support" class="pop-card card-support">
-          <div class="card-emoji">🐛</div>
-          <div class="card-title">App Support</div>
-          <p class="card-desc">バグ見つけた？機能追加したい？<br>開発者に直接文句を言おう。</p>
-        </a>
-
-        <!-- Privacy Card -->
-        <a href="/privacy" class="pop-card card-privacy">
-          <div class="card-emoji">🔐</div>
-          <div class="card-title">Privacy Policy</div>
-          <p class="card-desc">あなたの秘密は守ります。<br>データの取り扱いについて。</p>
-        </a>
-
-        <!-- Terms Card -->
-        <a href="/terms" class="pop-card card-terms">
-          <div class="card-emoji">📜</div>
-          <div class="card-title">Terms of Use</div>
-          <p class="card-desc">なかよく使うための<br>お約束ごと。</p>
-        </a>
-      </div>
+      <div class="section-title">Menu</div>
+      
+      <ul class="link-list">
+        <li class="link-item">
+          <a href="/support">
+            <span class="link-title">App Support</span>
+            <span class="link-desc">お問い合わせ・不具合報告</span>
+            <span class="arrow">→</span>
+          </a>
+        </li>
+        <li class="link-item">
+          <a href="/privacy">
+            <span class="link-title">Privacy Policy</span>
+            <span class="link-desc">個人情報保護方針</span>
+            <span class="arrow">→</span>
+          </a>
+        </li>
+        <li class="link-item">
+          <a href="/terms">
+            <span class="link-title">Terms of Use</span>
+            <span class="link-desc">利用規約</span>
+            <span class="arrow">→</span>
+          </a>
+        </li>
+      </ul>
     </main>
+
+    <footer class="footer">
+      <div>&copy; 2025 zndmonya</div>
+    </footer>
   </div>
-
-  <footer class="site-footer">
-    <div class="container footer-content">
-      <div class="copyright">
-        © 2025 zndmonya.<br>
-        <span style="font-size: 0.9rem; font-weight: 400;">Made with 💻 & ☕️</span>
-      </div>
-      <div>
-        <a href="/terms" class="nav-link" style="font-size: 1rem; margin-right: 20px;">Terms</a>
-        <a href="/privacy" class="nav-link" style="font-size: 1rem;">Privacy</a>
-      </div>
-    </div>
-  </footer>
-
-  <script src="theme.js"></script>
 
 </body>
 </html>
