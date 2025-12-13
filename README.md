@@ -1,18 +1,20 @@
 # zndmonya.com
 
-静的ファイルを Vercel でホスティングします。
-iOSアプリ開発者用サイト（Developer Portal）として構成されています。
+iOSデベロッパー zndmonya の公式ポートフォリオサイトです。
+Vercelでホスティングされています。
 
-## 公開されるURL
+## 公開URL
 
-- `/`：トップページ（メニュー）
-- `/support`：サポートページ
-- `/privacy`：プライバシーポリシー
-- `/terms`：利用規約
-- `/app-ads.txt`：AdMob の `app-ads.txt`
+- **Home**: `https://zndmonya.com` (アプリ一覧・プロフィール)
+- **Support**: `https://zndmonya.com/support`
+- **Privacy Policy**: `https://zndmonya.com/privacy`
+- **Terms of Use**: `https://zndmonya.com/terms`
 
-## デプロイ（Vercel）
+## 掲載アプリ
 
-1. Vercel で本リポジトリを Import
-2. Framework Preset は **Other**（静的）
-3. Deploy
+1. **TrapFinder**
+   - App Store: [Link](https://apps.apple.com/jp/app/trapfinder/id6756207736)
+
+## 更新方法
+
+新しいアプリを追加する場合は、`zndmonya/index.html` の `<!-- App 2 -->` の部分をコピーして編集してください。
