@@ -4,89 +4,70 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>zndmonya</title>
-  <meta name="description" content="zndmonyaのポートフォリオ。iOSアプリ TrapFinder などを開発中。">
+  <meta name="description" content="zndmonyaのポートフォリオ。">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
 </head>
 <body>
   
-  <div class="wrapper">
+  <div class="bento-grid">
     
-    <!-- Header / Profile -->
-    <header class="header">
-      <a href="/" class="brand">zndmonya</a>
-      
-      <div class="profile-section">
-        <div class="avatar">👨‍💻</div>
-        <div class="profile-name">zndmonya</div>
-        <p class="profile-bio">
-          iOS / Web App Developer.<br>
-          ずんだ餅とコードが好きです。
-        </p>
-        <nav class="nav">
-          <a href="https://qiita.com" target="_blank" class="nav-item">Qiita</a>
-          <a href="https://twitter.com" target="_blank" class="nav-item">X (Twitter)</a>
-        </nav>
+    <!-- 1. Profile (Large, Top-Left) -->
+    <div class="card card-profile">
+      <div class="avatar">👨‍💻</div>
+      <div class="profile-info">
+        <h1>zndmonya</h1>
+        <p>iOS & Web App Developer based in Japan.<br>Creating simple, useful tools for everyday life.</p>
       </div>
-    </header>
+    </div>
 
-    <main>
-      <div class="section-heading">作ったアプリ</div>
-
-      <!-- TrapFinder -->
-      <a href="https://apps.apple.com/jp/app/trapfinder/id6756207736" target="_blank" rel="noopener noreferrer" class="work-card card-pinned">
-        <div class="pinned-badge">New!</div>
-        <div class="work-header">
-          <div class="work-icon" style="background: #FDF8EC; color: #DC7B62; font-family: 'Arial Rounded MT Bold', sans-serif;">T</div>
-          <div>
-            <span class="work-tag">iOS App</span>
-            <h3 class="work-title">TrapFinder</h3>
-          </div>
-        </div>
-        <p class="work-desc">
-          日常に潜む「罠」を可視化するAR探索アプリ。<br>
-          あなたの周りの見えないリスクを発見します。
-        </p>
-      </a>
-
-      <!-- Qiibrary -->
-      <a href="https://qiibrary.com" target="_blank" rel="noopener noreferrer" class="work-card">
-        <div class="work-header">
-          <div class="work-icon" style="background: #f0f4f8; color: #55c500; font-family: sans-serif; font-weight: 800;">Q</div>
-          <div>
-            <span class="work-tag" style="background: #3498db;">Web App</span>
-            <h3 class="work-title">Qiibrary</h3>
-          </div>
-        </div>
-        <p class="work-desc">
-          開発者のための情報収集プラットフォーム。<br>
-          技術記事やリファレンスを効率よく管理できます。
-        </p>
-      </a>
-
-      <div class="section-heading">インフォメーション</div>
-
-      <div class="info-list">
-        <a href="/support" class="info-item">
-          <span>🚑 アプリのサポート・お問い合わせ</span>
-          <span class="arrow">→</span>
-        </a>
-        <a href="/privacy" class="info-item">
-          <span>🔐 プライバシーポリシー</span>
-          <span class="arrow">→</span>
-        </a>
-        <a href="/terms" class="info-item">
-          <span>📜 利用規約</span>
-          <span class="arrow">→</span>
-        </a>
+    <!-- 2. Social (Small, Top-Right) -->
+    <div class="card card-social">
+      <div class="social-icons">
+        <a href="https://github.com" target="_blank" class="social-icon">GH</a>
+        <a href="https://twitter.com" target="_blank" class="social-icon">X</a>
+        <a href="https://note.com" target="_blank" class="social-icon">Nt</a>
       </div>
+      <p>Follow Me</p>
+    </div>
 
-    </main>
+    <!-- 3. TrapFinder (Tall, Left) -->
+    <a href="https://apps.apple.com/jp/app/trapfinder/id6756207736" target="_blank" rel="noopener noreferrer" class="card card-trapfinder">
+      <div class="tf-icon">T</div>
+      <div class="tf-title">TrapFinder</div>
+      <div class="tf-desc">AR Exploration Tool for iOS</div>
+      <div class="tf-badge">App Store ↗</div>
+    </a>
 
-    <footer class="footer">
-      © 2025 zndmonya
-    </footer>
+    <!-- 4. Qiibrary (Wide, Center) -->
+    <a href="https://qiibrary.com" target="_blank" rel="noopener noreferrer" class="card card-qiibrary">
+      <div class="qiibrary-logo">
+        <span>Q</span> Qiibrary
+      </div>
+      <p style="color: #666; margin-bottom: 20px;">Developers' Knowledge Base Platform.</p>
+      <span class="qiibrary-tag">Web App</span>
+    </a>
+
+    <!-- 5. Support (Small, Bottom-Center) -->
+    <a href="/support" class="card card-support">
+      <div class="icon-large">🚑</div>
+      <div class="card-title">Support</div>
+      <div class="card-desc">お問い合わせ・不具合報告</div>
+    </a>
+
+    <!-- 6. Legal (Small, Bottom-Right) -->
+    <div class="card card-legal">
+      <a href="/privacy" class="legal-link">
+        <span>Privacy Policy</span>
+        <span>→</span>
+      </a>
+      <a href="/terms" class="legal-link">
+        <span>Terms of Use</span>
+        <span>→</span>
+      </a>
+    </div>
 
   </div>
+
 </body>
 </html>
