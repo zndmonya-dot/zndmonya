@@ -1,239 +1,352 @@
 /* 
-  Theme: Neo-Pop & Raw 
-  Concept: Brutalism meets Kawaii. No more AI templates.
+  Multi-Theme Design System
+  Included Themes: Neo-Pop, Hacker, Retro, Swiss, Zen
 */
 
 :root {
-  --bg-color: #FFFCF0; /* 暖かいアイボリー */
-  --ink: #111111;      /* 真っ黒じゃない黒 */
+  /* Default: Neo-Pop */
+  --bg-color: #FFFCF0;
+  --bg-pattern: radial-gradient(#d0d0d0 1px, transparent 1px);
+  --bg-size: 24px 24px;
   
-  --color-accent-1: #FFD43B; /* ポップな黄色 */
-  --color-accent-2: #FF6B6B; /* 鮮やかな赤 */
-  --color-accent-3: #4DABF7; /* 空色 */
-  --color-accent-4: #69DB7C; /* 草色 */
-
+  --ink: #111111;
+  --text-main: #111111;
+  --text-sub: #444444;
+  
+  --accent-1: #FFD43B;
+  --accent-2: #FF6B6B;
+  --accent-3: #4DABF7;
+  
   --border-width: 3px;
-  --shadow-depth: 6px;
+  --border-style: solid;
+  --border-color: #111111;
   
   --radius: 16px;
+  --shadow: 6px 6px 0 #111111;
+  --shadow-hover: 10px 10px 0 #111111;
+  
+  --font-body: "Hiragino Maru Gothic ProN", "Mplus 1p", sans-serif;
+  --font-heading: "Hiragino Maru Gothic ProN", sans-serif;
+  
+  --card-bg: #ffffff;
+  --header-bg: transparent;
+  --btn-radius: 99px;
+}
+
+/* 📟 Theme: Hacker Terminal */
+[data-theme="hacker"] {
+  --bg-color: #0d0d0d;
+  --bg-pattern: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  --bg-size: 100% 2px, 3px 100%;
+  
+  --ink: #00ff41;
+  --text-main: #00ff41;
+  --text-sub: #008F11;
+  
+  --accent-1: #003B00;
+  --accent-2: #00ff41;
+  --accent-3: #008F11;
+  
+  --border-width: 1px;
+  --border-style: solid;
+  --border-color: #00ff41;
+  
+  --radius: 0px;
+  --shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+  --shadow-hover: 0 0 20px rgba(0, 255, 65, 0.8);
+  
+  --font-body: "Courier New", Courier, monospace;
+  --font-heading: "Courier New", Courier, monospace;
+  
+  --card-bg: #001100;
+  --header-bg: #000;
+  --btn-radius: 0px;
+}
+
+/* 💾 Theme: Retro OS */
+[data-theme="retro"] {
+  --bg-color: #008080;
+  --bg-pattern: none;
+  --bg-size: auto;
+  
+  --ink: #000000;
+  --text-main: #000000;
+  --text-sub: #444444;
+  
+  --accent-1: #c0c0c0; /* Window Gray */
+  --accent-2: #000080; /* Title Blue */
+  --accent-3: #ffffff;
+  
+  --border-width: 2px;
+  --border-style: solid;
+  --border-color: #404040; /* Bevel Dark */
+  
+  --radius: 0px;
+  --shadow: 2px 2px 0 #000000; /* Simple drop shadow */
+  --shadow-hover: 4px 4px 0 #000000;
+  
+  --font-body: "MS Sans Serif", Tahoma, sans-serif;
+  --font-heading: "MS Sans Serif", Tahoma, sans-serif;
+  
+  --card-bg: #c0c0c0; /* Windows Gray */
+  --header-bg: #c0c0c0;
+  --btn-radius: 0px;
+}
+
+/* 🇨🇭 Theme: Swiss Style */
+[data-theme="swiss"] {
+  --bg-color: #ffffff;
+  --bg-pattern: linear-gradient(#e5e5e5 1px, transparent 1px), linear-gradient(90deg, #e5e5e5 1px, transparent 1px);
+  --bg-size: 40px 40px;
+  
+  --ink: #000000;
+  --text-main: #000000;
+  --text-sub: #555555;
+  
+  --accent-1: #ff3b30; /* Swiss Red */
+  --accent-2: #000000;
+  --accent-3: #f0f0f0;
+  
+  --border-width: 0px;
+  --border-style: none;
+  --border-color: transparent;
+  
+  --radius: 0px;
+  --shadow: none;
+  --shadow-hover: none; /* No shadows, flat */
+  
+  --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-heading: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  
+  --card-bg: #f5f5f5;
+  --header-bg: #fff;
+  --btn-radius: 0px;
+}
+
+/* 🍵 Theme: Zen */
+[data-theme="zen"] {
+  --bg-color: #fcfaf2; /* Washi */
+  --bg-pattern: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmNmYWYyIi8+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNkZGQ4Y2UiLz4KPC9zdmc+');
+  --bg-size: auto;
+  
+  --ink: #2f3e46; /* Sumi */
+  --text-main: #2f3e46;
+  --text-sub: #5f6c7b;
+  
+  --accent-1: #84a98c; /* Matcha */
+  --accent-2: #cd5d67; /* Azuki */
+  --accent-3: #cad2c5;
+  
+  --border-width: 1px;
+  --border-style: solid;
+  --border-color: #cad2c5;
+  
+  --radius: 8px;
+  --shadow: 0 4px 12px rgba(47, 62, 70, 0.08);
+  --shadow-hover: 0 8px 24px rgba(47, 62, 70, 0.12);
+  
+  --font-body: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  --font-heading: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  
+  --card-bg: #ffffff;
+  --header-bg: rgba(255,255,255,0.8);
+  --btn-radius: 4px;
 }
 
 /* Base Reset */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   background-color: var(--bg-color);
-  color: var(--ink);
-  font-family: "Hiragino Maru Gothic ProN", "Mplus 1p", "Rounded Mplus 1c", sans-serif;
+  background-image: var(--bg-pattern);
+  background-size: var(--bg-size);
+  color: var(--text-main);
+  font-family: var(--font-body);
   line-height: 1.6;
-  overflow-x: hidden;
-  /* 紙のようなザラつきを追加 */
-  background-image: radial-gradient(#d0d0d0 1px, transparent 1px);
-  background-size: 24px 24px;
+  transition: background 0.3s, color 0.3s;
 }
 
-/* 
-  Container: 画面中央に寄せず、左右を大きく使う
-*/
 .container {
   max-width: 900px;
   margin: 0 auto;
   padding: 0 24px;
-  position: relative;
 }
 
-/* 
-  Navigation: "浮いている" アイランド型 
-  上部に固定せず、コンテンツの上にフワッと置く
-*/
+/* Header */
 .site-header {
   margin-top: 40px;
-  margin-bottom: 80px;
+  margin-bottom: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 16px;
+  background: var(--header-bg);
+  border-radius: var(--radius);
 }
 
 .brand {
-  font-size: 2rem;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
   font-weight: 900;
   text-decoration: none;
-  color: var(--ink);
-  background: var(--color-accent-1);
+  color: var(--text-main);
   padding: 8px 16px;
-  border: var(--border-width) solid var(--ink);
-  border-radius: 8px;
-  box-shadow: var(--shadow-depth) var(--shadow-depth) 0 var(--ink);
-  transition: transform 0.1s, box-shadow 0.1s;
-  transform: rotate(-2deg); /* 生意気に傾ける */
+  /* For Neo-Pop */
+  background: var(--accent-1);
+  border: var(--border-width) var(--border-style) var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
-.brand:active {
-  transform: translate(2px, 2px) rotate(-2deg);
-  box-shadow: 2px 2px 0 var(--ink);
+[data-theme="hacker"] .brand,
+[data-theme="swiss"] .brand,
+[data-theme="zen"] .brand {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  padding: 0;
+}
+
+[data-theme="retro"] .brand {
+  background: #000080;
+  color: white;
+  padding: 4px 8px;
+  box-shadow: inset 2px 2px #000080, inset -2px -2px #000080; /* simple inset */
 }
 
 .nav-link {
-  font-weight: 800;
+  font-weight: 700;
   text-decoration: none;
-  color: var(--ink);
-  font-size: 1.2rem;
-  border-bottom: 3px solid transparent;
-  transition: all 0.2s;
+  color: var(--text-main);
+  font-size: 1.1rem;
+  margin-left: 20px;
 }
 
-.nav-link:hover {
-  border-bottom: 3px solid var(--color-accent-2);
-  transform: translateY(-2px);
-}
-
-/* Typography */
+/* Typography & Layout */
 h1 {
-  font-size: clamp(3rem, 8vw, 5rem);
-  line-height: 1;
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1.1;
   margin-bottom: 32px;
-  letter-spacing: -0.04em;
-  text-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+  color: var(--text-main);
 }
 
-h2 {
-  font-size: 2rem;
-  font-weight: 800;
-  margin: 60px 0 32px;
-  display: inline-block;
-  background: white;
-  padding: 4px 12px;
-  border: var(--border-width) solid var(--ink);
-  box-shadow: 4px 4px 0 var(--color-accent-3);
-  transform: rotate(1deg);
+[data-theme="swiss"] h1 {
+  font-size: 6rem;
+  letter-spacing: -2px;
 }
 
-p {
-  font-size: 1.2rem;
-  max-width: 600px;
-  font-weight: 500;
-  margin-bottom: 24px;
-}
-
-/* 
-  Card Grid: 自由な配置
-*/
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 40px;
+  gap: 32px;
   margin: 60px 0;
 }
 
-/* 
-  Pop Card: 太枠 + ハードシャドウ 
-*/
 .pop-card {
-  background: white;
-  border: var(--border-width) solid var(--ink);
+  background: var(--card-bg);
+  border: var(--border-width) var(--border-style) var(--border-color);
   border-radius: var(--radius);
   padding: 32px;
   text-decoration: none;
-  color: var(--ink);
-  position: relative;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: var(--shadow-depth) var(--shadow-depth) 0 var(--ink);
+  color: var(--text-main);
   display: flex;
   flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow);
+}
+
+/* Retro Specifics */
+[data-theme="retro"] .pop-card {
+  box-shadow: inset 1px 1px #dfdfdf, inset -1px -1px #000000, inset 2px 2px #ffffff, inset -2px -2px #808080;
+  border: none;
+}
+[data-theme="retro"] .pop-card:active {
+  box-shadow: inset 1px 1px #000000, inset -1px -1px #dfdfdf, inset 2px 2px #808080, inset -2px -2px #ffffff;
 }
 
 .pop-card:hover {
-  transform: translate(-4px, -4px);
-  box-shadow: 10px 10px 0 var(--ink);
-  background: #fff; /* z-index対策 */
-  z-index: 10;
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
 }
 
-.pop-card:active {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 var(--ink);
+[data-theme="swiss"] .pop-card:hover {
+  transform: none;
+  background: var(--accent-1);
+  color: white;
+}
+[data-theme="swiss"] .pop-card:hover .card-desc {
+  color: white;
 }
 
-/* カードごとの個性（色分け） */
-.card-support { background-color: #e8fff0; }
-.card-privacy { background-color: #f0f7ff; }
-.card-terms   { background-color: #fff4e6; }
-
-.card-emoji {
-  font-size: 4rem;
-  margin-bottom: 16px;
-  line-height: 1;
-  filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.2));
-}
-
-.card-title {
-  font-size: 1.5rem;
-  font-weight: 800;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.card-desc {
-  font-size: 1rem;
-  color: #444;
-  font-weight: 500;
-  line-height: 1.5;
-}
+.card-emoji { font-size: 3rem; margin-bottom: 16px; }
+.card-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
+.card-desc { font-size: 1rem; color: var(--text-sub); }
 
 /* Document Styles */
 .document-content {
-  background: white;
-  border: var(--border-width) solid var(--ink);
+  background: var(--card-bg);
+  border: var(--border-width) var(--border-style) var(--border-color);
   border-radius: var(--radius);
-  padding: 48px;
-  box-shadow: var(--shadow-depth) var(--shadow-depth) 0 var(--ink);
+  padding: 40px;
+  box-shadow: var(--shadow);
 }
-
-.document-content h2 {
-  background: none;
+[data-theme="retro"] .document-content {
+  box-shadow: inset 1px 1px #dfdfdf, inset -1px -1px #000000, inset 2px 2px #ffffff, inset -2px -2px #808080;
   border: none;
-  box-shadow: none;
-  padding: 0;
-  transform: none;
-  border-bottom: 3px solid var(--color-accent-1);
-  display: block;
-  width: 100%;
-  margin-top: 48px;
 }
 
 /* Footer */
 .site-footer {
-  margin-top: 100px;
-  padding: 60px 0;
-  border-top: var(--border-width) solid var(--ink);
-  background: white;
+  margin-top: 80px;
+  padding: 40px 0;
+  text-align: center;
+  border-top: var(--border-width) var(--border-style) var(--border-color);
 }
+[data-theme="retro"] .site-footer { border-top: none; }
 
-.footer-content {
+/* Theme Switcher Widget */
+.theme-switcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--card-bg);
+  border: var(--border-width) var(--border-style) var(--border-color);
+  padding: 8px;
+  border-radius: 99px;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  gap: 24px;
+  gap: 8px;
+  z-index: 9999;
+  box-shadow: var(--shadow);
 }
 
-.copyright {
-  font-weight: 700;
-  font-size: 1.2rem;
+[data-theme="retro"] .theme-switcher {
+  border-radius: 0;
+  box-shadow: inset 1px 1px #dfdfdf, inset -1px -1px #000000, inset 2px 2px #ffffff, inset -2px -2px #808080;
+  border: none;
 }
+
+.theme-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+  background: #eee;
+}
+.theme-btn:hover { transform: scale(1.1); }
+[data-theme="retro"] .theme-btn { border-radius: 0; border: 1px solid #888; }
 
 /* Mobile */
 @media (max-width: 768px) {
-  h1 { font-size: 3.5rem; }
-  .site-header { margin-bottom: 40px; }
-  .card-grid { gap: 24px; }
-  .pop-card { box-shadow: 4px 4px 0 var(--ink); }
-  .document-content { padding: 24px; }
+  .theme-switcher {
+    bottom: 16px;
+    right: 50%;
+    transform: translateX(50%);
+  }
 }
