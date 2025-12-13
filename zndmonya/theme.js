@@ -1,12 +1,12 @@
 (function() {
   const themes = [
-    { id: 'default', icon: '📰', name: 'Magazine' },
-    { id: 'midnight', icon: '🌙', name: 'Midnight' },
-    { id: 'zunda', icon: '🟢', name: 'Zunda' },
-    { id: 'terminal', icon: '📟', name: 'Terminal' }
+    { id: 'default', icon: '📰', name: 'マガジン風 (標準)' },
+    { id: 'midnight', icon: '🌙', name: 'ダークモード' },
+    { id: 'zunda', icon: '🟢', name: 'ずんだカラー' },
+    { id: 'terminal', icon: '📟', name: 'ハッカー風' }
   ];
 
-  // Create UI
+  // UI作成
   const container = document.createElement('div');
   container.className = 'theme-switcher';
   
@@ -14,14 +14,14 @@
     const btn = document.createElement('button');
     btn.className = 'theme-btn';
     btn.textContent = t.icon;
-    btn.title = t.name;
+    btn.title = t.name; // ホバー時に日本語で出る
     btn.onclick = () => setTheme(t.id);
     container.appendChild(btn);
   });
   
   document.body.appendChild(container);
 
-  // Set Theme
+  // テーマ適用
   function setTheme(id) {
     if (id === 'default') {
       document.documentElement.removeAttribute('data-theme');
@@ -31,8 +31,7 @@
     localStorage.setItem('zndmonya-theme', id);
   }
 
-  // Init
+  // 初期ロード
   const saved = localStorage.getItem('zndmonya-theme');
   if (saved) setTheme(saved);
 })();
-
