@@ -1,49 +1,24 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy | zndmonya</title>
-  <link rel="stylesheet" href="../style.css">
-  <link rel="icon" href="../icon.svg" type="image/svg+xml">
-</head>
-<body>
-  
-  <div class="wrapper">
-    <header>
-      <a href="/" class="brand">zndmonya</a>
-    </header>
+import { LegalLayout } from '@/components/LegalLayout';
 
-    <main class="prose">
-      <h1>Privacy Policy</h1>
-      <p style="font-size: 0.9rem;">Last updated: 2025-12-12</p>
-
-      <p>本アプリにおける利用者情報の取り扱いについて、以下の通りプライバシーポリシーを定めます。</p>
-
+export default function PrivacyPage() {
+  return (
+    <LegalLayout title="プライバシーポリシー" meta="Last updated: 2025-12-12">
+      <p>本アプリにおける利用者情報の取り扱いについて、以下の通り定めます。</p>
       <h2>1. 取得する情報とその利用目的</h2>
       <p>当アプリでは、アプリの品質向上や広告配信のために、以下の情報を取得・利用することがあります。</p>
       <ul>
         <li>端末情報・ログ情報（クラッシュログ等）</li>
         <li>広告識別子（IDFA/AdID）</li>
       </ul>
-
       <h2>2. 第三者提供・情報収集モジュール</h2>
-      <p>以下の第三者サービスを利用しています。</p>
       <ul>
         <li>Google AdMob</li>
         <li>Google Firebase</li>
       </ul>
-
       <h2>3. 個人情報の管理</h2>
       <p>お問い合わせ等を通じてご提供いただいた個人情報は適切に管理し、お問い合わせへの対応以外の目的には使用いたしません。</p>
-
       <h2>4. 免責事項</h2>
       <p>当アプリの利用により生じた損害について、開発者は一切の責任を負わないものとします。</p>
-    </main>
-
-    <footer>
-      © 2025 zndmonya
-    </footer>
-  </div>
-</body>
-</html>
+    </LegalLayout>
+  );
+}
