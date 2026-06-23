@@ -1,6 +1,6 @@
 # zndmonya
 
-**非公開のファイルやり取りサイト**です。`vault/` がメインのホームページになります。
+**非公開のファイルやり取りサイト**です。
 
 ## 概要
 
@@ -8,12 +8,11 @@
 |------|------|
 | 用途 | 自宅PCからアップロード → 社内PCからダウンロード |
 | 公開範囲 | **非公開**（パスワード認証必須） |
-| デプロイ | Vercel · Root Directory = `vault` · ドメイン `zndmonya.com` |
+| デプロイ | Vercel · ドメイン `zndmonya.com` |
 
 ## 起動
 
 ```bash
-cd vault
 cp .env.example .env.local
 npm install
 npm run dev:clean
@@ -27,8 +26,9 @@ npm run dev:clean
 | `/` | 必要 | ホーム（アップロード + ダウンロード） |
 | `/privacy` `/terms` `/support` | 不要 | 法的ページ（App Store 用） |
 
-## 旧ポートフォリオ
+## Vercel デプロイ
 
-旧静的サイト（`zndmonya/`）は削除済みです。Vercel の Root Directory を `vault` に設定してください。
+Root Directory は **空（リポジトリ直下）** のままで OK です。
+環境変数 `VAULT_PASSWORD` / `SESSION_SECRET` / `BLOB_READ_WRITE_TOKEN` を設定してください。
 
-詳細: [vault/SPEC.md](vault/SPEC.md)
+詳細: [SPEC.md](SPEC.md)

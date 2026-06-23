@@ -35,11 +35,11 @@ zndmonya.com は**非公開**のファイルやり取りホームページです
 npm run dev:clean
 ```
 
-ファイルは `vault/packages/` に保存されます（Blob トークン未設定時）。
+ファイルは `packages/` に保存されます（Blob トークン未設定時）。
 
 ## Vercel デプロイ
 
-1. Root Directory = `vault`
+1. Root Directory は **空（リポジトリ直下）** — 以前 `vault` にしていた場合はクリア
 2. 環境変数を設定
 3. Vercel Blob を接続（本番）
 4. ドメイン `zndmonya.com` を割り当て
