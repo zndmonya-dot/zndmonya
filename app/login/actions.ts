@@ -2,7 +2,7 @@
 
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { createSessionToken, verifyPassword } from '@/lib/auth';
+import { createSessionToken, isAuthConfigured, verifyPassword } from '@/lib/auth';
 import { SESSION_COOKIE } from '@/lib/constants';
 
 export async function loginAction(
@@ -10,11 +10,19 @@ export async function loginAction(
   formData: FormData,
 ): Promise<{ error: string }> {
   const password = formData.get('password') as string;
+  if (!isAuthConfigured()) {
+    return { error: 'サーバー設定が未完了です（VAULT_PASSWORD / SESSION_SECRET）' };
+  }
   if (!verifyPassword(password)) {
     return { error: 'パスワードが正しくありません' };
   }
 
-  cookies().set(SESSION_COOKIE, createSessionToken(), {
+  const token = createSessionToken();
+  if (!token) {
+    return { error: 'セッションを開始できません（SESSION_SECRET を確認してください）' };
+  }
+
+  cookies().set(SESSION_COOKIE, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
