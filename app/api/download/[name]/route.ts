@@ -6,12 +6,13 @@ import { deleteLocalFile, getStorageConfigError, isLocalMode, openLocalFileStrea
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(_request: Request, { params }: { params: { name: string } }) {
-  if (!isAuthenticated()) {
+export async function GET(_request: Request, { params }: { params: Promise<{ name: string }> }) {
+  if (!(await isAuthenticated())) {
     return NextResponse.json({ error: '認証が必要です' }, { status: 401 });
   }
 
-  const name = decodeURIComponent(params.name);
+  const { name: rawName } = await params;
+  const name = decodeURIComponent(rawName);
   const headers = {
     'Content-Type': 'application/octet-stream',
     'Content-Disposition': `attachment; filename="${encodeURIComponent(name)}"`,
@@ -39,12 +40,13 @@ export async function GET(_request: Request, { params }: { params: { name: strin
   }
 }
 
-export async function DELETE(_request: Request, { params }: { params: { name: string } }) {
-  if (!isAuthenticated()) {
+export async function DELETE(_request: Request, { params }: { params: Promise<{ name: string }> }) {
+  if (!(await isAuthenticated())) {
     return NextResponse.json({ error: '認証が必要です' }, { status: 401 });
   }
 
-  const name = decodeURIComponent(params.name);
+  const { name: rawName } = await params;
+  const name = decodeURIComponent(rawName);
 
   try {
     const storageError = getStorageConfigError();

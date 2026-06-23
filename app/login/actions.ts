@@ -22,7 +22,8 @@ export async function loginAction(
     return { error: 'セッションを開始できません（SESSION_SECRET を確認してください）' };
   }
 
-  cookies().set(SESSION_COOKIE, token, {
+  const jar = await cookies();
+  jar.set(SESSION_COOKIE, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',

@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { SESSION_COOKIE } from '@/lib/constants';
 
 export async function logoutAction() {
-  cookies().set(SESSION_COOKIE, '', { httpOnly: true, path: '/', maxAge: 0 });
+  const jar = await cookies();
+  jar.set(SESSION_COOKIE, '', { httpOnly: true, path: '/', maxAge: 0 });
   redirect('/login');
 }

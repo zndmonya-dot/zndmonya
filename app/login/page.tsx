@@ -1,29 +1,42 @@
+import { FolderArchive } from 'lucide-react';
 import { LoginForm } from './LoginForm';
-import { SceneComposer } from '@/components/SceneComposer';
+import { isAuthConfigured } from '@/lib/auth';
+import { PageScene } from '@/vault/components/page-scene';
 
-export default function LoginPage({ searchParams }: { searchParams: { from?: string } }) {
-  const from = searchParams.from || '';
+export const dynamic = 'force-dynamic';
+
+const SITE_TITLE = 'ファイル転送サービス（仮）';
+
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ from?: string }>;
+}) {
+  const { from = '' } = await searchParams;
+  const configured = isAuthConfigured();
 
   return (
-    <div className="login-page">
-      <div className="login-page__art anim anim--1">
-        <SceneComposer variant="login" priority />
-      </div>
-      <div className="login-card">
-        <div className="brand brand--large">
-          <span className="brand__mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M1 12h15M16 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </span>
-          <span>
-            <span className="brand__name">LogiDesk</span>
-            <span className="brand__sub">拠点間配送</span>
-          </span>
+    <PageScene>
+      <div className="flex flex-1 items-center justify-center px-5 py-12">
+        <div className="vault-panel w-full max-w-sm p-6">
+          <div className="relative flex items-center gap-2.5">
+            <FolderArchive className="size-7 text-primary" strokeWidth={1.5} aria-hidden />
+            <span className="text-sm font-semibold text-foreground">{SITE_TITLE}</span>
+          </div>
+
+          <h1 className="relative mt-6 text-base font-semibold text-foreground">ログイン</h1>
+
+          {!configured && (
+            <p className="relative mt-3 rounded-lg border border-destructive/30 bg-destructive/5 px-3 py-2 text-xs text-destructive" role="alert">
+              <code className="font-mono">.env.local</code> を設定して再起動してください
+            </p>
+          )}
+
+          <div className="relative mt-4">
+            <LoginForm from={from} disabled={!configured} />
+          </div>
         </div>
-        <p className="login-subtitle">拠点間配送システムへログイン</p>
-        <LoginForm from={from} />
       </div>
-    </div>
+    </PageScene>
   );
 }

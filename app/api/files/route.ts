@@ -6,7 +6,7 @@ import { getStorageConfigError, isLocalMode, listLocalFiles } from '@/lib/storag
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  if (!isAuthenticated()) {
+  if (!(await isAuthenticated())) {
     return NextResponse.json({ error: '認証が必要です' }, { status: 401 });
   }
 

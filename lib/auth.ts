@@ -44,6 +44,7 @@ export function verifySessionToken(token: string | undefined): boolean {
   }
 }
 
-export function isAuthenticated(): boolean {
-  return verifySessionToken(cookies().get(SESSION_COOKIE)?.value);
+export async function isAuthenticated(): Promise<boolean> {
+  const jar = await cookies();
+  return verifySessionToken(jar.get(SESSION_COOKIE)?.value);
 }

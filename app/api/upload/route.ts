@@ -3,8 +3,9 @@ import type { HandleUploadBody } from '@vercel/blob/client';
 import { isAuthenticated } from '@/lib/auth';
 import { getStorageConfigError, isLocalMode, saveLocalFile } from '@/lib/storage';
 
+/** アップロード API — ローカルは FormData、本番は Vercel Blob の handleUpload */
 export async function POST(request: Request): Promise<NextResponse> {
-  if (!isAuthenticated()) {
+  if (!(await isAuthenticated())) {
     return NextResponse.json({ error: '認証が必要です' }, { status: 401 });
   }
 
