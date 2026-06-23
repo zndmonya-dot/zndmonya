@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react';
 import { HubRoute } from '@/components/HubRoute';
-import { Illustration } from '@/components/Illustration';
+import { SceneComposer } from '@/components/SceneComposer';
 import { StatusSteps } from '@/components/StatusSteps';
 import { ToastStack, useToast } from '@/components/Toast';
 import { collectDroppedFiles, totalBytes, type StagedFile } from '@/lib/collect-files';
@@ -168,14 +168,14 @@ export function FileHub() {
 
   return (
     <div className="hub">
-      <section className="hero illus-wrap anim anim--1">
+      <section className="hero anim anim--1">
         <div className="hero__text">
           <span className="pill anim-pill">拠点間ルート · HUB-A → HUB-B</span>
           <h1>拠点間ファイル配送</h1>
           <p>出荷拠点から受取拠点へファイルを輸送。梱包から幹線輸送まで自動処理します。</p>
           <HubRoute active={busy} />
         </div>
-        <Illustration name="hero" className="hero__illus" priority />
+        <SceneComposer variant="hero" active={busy} priority />
       </section>
 
       <div className="tls-notice anim anim--2">
@@ -203,7 +203,7 @@ export function FileHub() {
         {busy && <StatusSteps phase={phaseForSteps} />}
 
         <div
-          className={`drop-port illus-wrap${dragging ? ' drop-port--active' : ''}${busy ? ' drop-port--busy' : ''}`}
+          className={`drop-port${dragging ? ' drop-port--active' : ''}${busy ? ' drop-port--busy' : ''}`}
           role="button"
           tabIndex={0}
           onClick={() => !busy && inputRef.current?.click()}
@@ -216,7 +216,7 @@ export function FileHub() {
             handleDataTransfer(e.dataTransfer);
           }}
         >
-          <Illustration name="upload" className="drop-port__illus" />
+          <SceneComposer variant="drop" active={busy || dragging} />
           <p className="drop-port__title">
             {busy ? phaseLabel : '集荷バースにファイルを配置'}
           </p>
@@ -275,8 +275,8 @@ export function FileHub() {
           )}
           {error && <div className="parcel-empty parcel-empty--error">{error}</div>}
           {!loading && !error && files.length === 0 && (
-            <div className="parcel-empty illus-wrap">
-              <Illustration name="empty" className="parcel-empty__illus" />
+            <div className="parcel-empty">
+              <SceneComposer variant="empty" />
               <p className="parcel-empty__title">入庫データはありません</p>
               <p className="parcel-empty__desc">HUB-A から出荷されると、ここに表示されます。</p>
             </div>

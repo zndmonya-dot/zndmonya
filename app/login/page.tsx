@@ -1,13 +1,13 @@
 import { LoginForm } from './LoginForm';
-import { Illustration } from '@/components/Illustration';
+import { SceneComposer } from '@/components/SceneComposer';
 
 export default function LoginPage({ searchParams }: { searchParams: { from?: string } }) {
   const from = searchParams.from || '';
 
   return (
     <div className="login-page">
-      <div className="login-page__art illus-wrap anim anim--1">
-        <Illustration name="hero" className="login-page__illus" priority />
+      <div className="login-page__art anim anim--1">
+        <SceneComposer variant="login" priority />
       </div>
       <div className="login-card">
         <div className="brand brand--large">
