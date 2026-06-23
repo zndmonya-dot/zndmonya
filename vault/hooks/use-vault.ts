@@ -7,7 +7,7 @@ import { MAX_UPLOAD_BYTES } from '@/lib/constants-client';
 import { formatSize } from '@/lib/format';
 import type { FileEntry } from '@/lib/storage';
 import { createZip, makeParcelName } from '@/lib/zip-client';
-import { uploadViaBlob, uploadViaForm } from '@/vault/lib/upload';
+import { shouldUseBlobUpload, uploadViaBlob, uploadViaForm } from '@/vault/lib/upload';
 
 export type VaultPhase = 'idle' | 'collecting' | 'packing' | 'uploading';
 
@@ -18,6 +18,8 @@ export const PHASE_LABEL: Record<VaultPhase, string> = {
   uploading: 'アップロード',
 };
 
+type StorageMode = 'local' | 'blob' | 'unconfigured';
+
 /**
  * ホーム画面の状態管理。
  * ファイル一覧の取得・ZIP 作成・アップロード・削除をまとめて扱う。
@@ -26,12 +28,13 @@ export function useVault() {
   const [files, setFiles] = useState<FileEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [mode, setMode] = useState<'local' | 'blob'>('local');
+  const [mode, setMode] = useState<StorageMode>('local');
   const [phase, setPhase] = useState<VaultPhase>('idle');
   const [progress, setProgress] = useState(0);
   const [statusLabel, setStatusLabel] = useState('');
 
   const busy = phase !== 'idle';
+  const storageReady = mode !== 'unconfigured';
 
   const loadFiles = useCallback(async () => {
     setLoading(true);
@@ -39,9 +42,11 @@ export function useVault() {
     try {
       const res = await fetch('/api/files', { cache: 'no-store' });
       const data = await res.json();
+      const nextMode: StorageMode =
+        data.mode === 'blob' ? 'blob' : data.mode === 'unconfigured' ? 'unconfigured' : 'local';
+      setMode(nextMode);
       if (!res.ok) throw new Error(data.error);
       setFiles(data.files);
-      setMode(data.mode === 'blob' ? 'blob' : 'local');
     } catch (err) {
       setError(err instanceof Error ? err.message : '読み込みに失敗しました');
     } finally {
@@ -53,6 +58,11 @@ export function useVault() {
 
   const uploadStaged = useCallback(async (staged: StagedFile[], password: string) => {
     if (!staged.length) return;
+
+    if (!storageReady) {
+      toast.error('ストレージが未設定です。Vercel Blob を接続してください');
+      return;
+    }
 
     const trimmed = password.trim();
     if (!trimmed) {
@@ -66,7 +76,7 @@ export function useVault() {
       return;
     }
 
-    const uploadFn = mode === 'blob' ? uploadViaBlob : uploadViaForm;
+    const uploadFn = shouldUseBlobUpload(mode) ? uploadViaBlob : uploadViaForm;
 
     try {
       setPhase('packing');
@@ -98,7 +108,7 @@ export function useVault() {
       setProgress(0);
       setStatusLabel('');
     }
-  }, [loadFiles, mode]);
+  }, [loadFiles, mode, storageReady]);
 
   const removeFile = useCallback(async (name: string) => {
     if (!confirm(`「${name}」を削除しますか？`)) return;
@@ -119,6 +129,7 @@ export function useVault() {
     progress,
     statusLabel,
     busy,
+    storageReady,
     loadFiles,
     uploadStaged,
     removeFile,

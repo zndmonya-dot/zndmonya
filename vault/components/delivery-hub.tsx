@@ -13,6 +13,7 @@ type Props = {
   progress: number;
   statusLabel: string;
   busy: boolean;
+  storageReady: boolean;
   files: FileEntry[];
   loading: boolean;
   error: string;
@@ -30,15 +31,21 @@ export function DeliveryHub(props: Props) {
         <h1 className="text-base font-semibold text-foreground">ファイル転送</h1>
         <p className="text-xs text-muted-foreground">
           上限 {formatSize(MAX_UPLOAD_BYTES)}
-          {!loading && <> · {files.length} 件</>}
+          {!loading && props.storageReady && <> · {files.length} 件</>}
         </p>
       </div>
+
+      {!props.storageReady && props.error && (
+        <p className="border-b border-destructive/20 bg-destructive/5 px-6 py-3 text-xs text-destructive" role="alert">
+          {props.error}
+        </p>
+      )}
 
       <SendStation
         phase={props.phase}
         progress={props.progress}
         statusLabel={props.statusLabel}
-        busy={props.busy}
+        busy={props.busy || !props.storageReady}
         onUpload={props.onUpload}
       />
       <ReceiveStation

@@ -4,6 +4,26 @@
  * - Vercel 本番: @vercel/blob/client のクライアント直アップロード
  */
 
+const BLOB_PREFIX = 'packages/';
+const MULTIPART_THRESHOLD = 100 * 1024 * 1024;
+
+function blobPathname(filename: string): string {
+  return `${BLOB_PREFIX}${filename}`;
+}
+
+function mapUploadError(err: unknown): Error {
+  if (!(err instanceof Error)) return new Error('送信に失敗しました');
+
+  const msg = err.message;
+  if (msg.includes('client token') || msg.includes('clientToken')) {
+    return new Error('ストレージへの接続に失敗しました。Blob の設定を確認してください');
+  }
+  if (msg.includes('content') && msg.includes('type')) {
+    return new Error('ファイル形式が許可されていません');
+  }
+  return err;
+}
+
 /** 開発環境 — packages/ へ直接保存 */
 export async function uploadViaForm(file: File, onProgress: (n: number) => void) {
   const form = new FormData();
@@ -31,10 +51,24 @@ export async function uploadViaForm(file: File, onProgress: (n: number) => void)
 
 /** 本番 — Vercel Blob へクライアント直アップロード（Function body 制限を回避） */
 export async function uploadViaBlob(file: File, onProgress: (n: number) => void) {
-  const { upload } = await import('@vercel/blob/client');
-  await upload(file.name, file, {
-    access: 'public',
-    handleUploadUrl: '/api/upload',
-    onUploadProgress: ({ percentage }) => onProgress(percentage),
-  });
+  try {
+    const { upload } = await import('@vercel/blob/client');
+    await upload(blobPathname(file.name), file, {
+      access: 'public',
+      handleUploadUrl: '/api/upload',
+      contentType: file.type || 'application/zip',
+      multipart: file.size > MULTIPART_THRESHOLD,
+      onUploadProgress: ({ percentage }) => onProgress(percentage),
+    });
+  } catch (err) {
+    throw mapUploadError(err);
+  }
+}
+
+/** localhost 以外では Blob 経路を優先（mode 判定ミス時の保険） */
+export function shouldUseBlobUpload(mode: 'local' | 'blob' | 'unconfigured'): boolean {
+  if (mode === 'blob' || mode === 'unconfigured') return true;
+  if (typeof window === 'undefined') return false;
+  const host = window.location.hostname;
+  return host !== 'localhost' && host !== '127.0.0.1';
 }

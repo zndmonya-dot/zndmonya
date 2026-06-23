@@ -37,6 +37,7 @@ export function VaultApp() {
           progress={vault.progress}
           statusLabel={vault.statusLabel}
           busy={vault.busy}
+          storageReady={vault.storageReady}
           files={vault.files}
           loading={vault.loading}
           error={vault.error}

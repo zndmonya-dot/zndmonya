@@ -1,20 +1,35 @@
 import { NextResponse } from 'next/server';
 import type { HandleUploadBody } from '@vercel/blob/client';
 import { isAuthenticated } from '@/lib/auth';
+import { MAX_UPLOAD_BYTES } from '@/lib/constants-client';
 import { getStorageConfigError, isLocalMode, saveLocalFile } from '@/lib/storage';
+
+export const runtime = 'nodejs';
+
+const BLOB_PREFIX = 'packages/';
+
+function isBlobClientRequest(contentType: string): boolean {
+  return contentType.includes('application/json');
+}
 
 /** アップロード API — ローカルは FormData、本番は Vercel Blob の handleUpload */
 export async function POST(request: Request): Promise<NextResponse> {
-  if (!(await isAuthenticated())) {
-    return NextResponse.json({ error: '認証が必要です' }, { status: 401 });
-  }
+  const contentType = request.headers.get('content-type') ?? '';
 
-  const storageError = getStorageConfigError();
-  if (storageError) {
-    return NextResponse.json({ error: storageError }, { status: 503 });
-  }
+  // 開発環境: FormData で packages/ に直接保存
+  if (!isBlobClientRequest(contentType)) {
+    if (!isLocalMode()) {
+      const storageError = getStorageConfigError();
+      return NextResponse.json(
+        { error: storageError ?? '本番では Vercel Blob 経由でアップロードしてください' },
+        { status: 503 },
+      );
+    }
 
-  if (isLocalMode()) {
+    if (!(await isAuthenticated())) {
+      return NextResponse.json({ error: '認証が必要です' }, { status: 401 });
+    }
+
     try {
       const formData = await request.formData();
       const file = formData.get('file') as File | null;
@@ -30,34 +45,50 @@ export async function POST(request: Request): Promise<NextResponse> {
     }
   }
 
-  const { handleUpload } = await import('@vercel/blob/client');
   const body = (await request.json()) as HandleUploadBody;
+
+  // ブラウザからのトークン要求のみセッション認証（完了 Webhook は署名で検証）
+  if (body.type === 'blob.generate-client-token') {
+    if (!(await isAuthenticated())) {
+      return NextResponse.json({ error: '認証が必要です' }, { status: 401 });
+    }
+
+    const storageError = getStorageConfigError();
+    if (storageError) {
+      return NextResponse.json({ error: storageError }, { status: 503 });
+    }
+  }
+
+  const { handleUpload } = await import('@vercel/blob/client');
 
   try {
     const jsonResponse = await handleUpload({
       body,
       request,
+      token: process.env.BLOB_READ_WRITE_TOKEN,
       onBeforeGenerateToken: async (pathname) => {
-        const safeName = pathname.replace(/[^a-zA-Z0-9._-]/g, '_');
+        if (!pathname.startsWith(BLOB_PREFIX)) {
+          throw new Error('無効なアップロード先です');
+        }
+
         return {
+          maximumSizeInBytes: MAX_UPLOAD_BYTES,
+          addRandomSuffix: true,
           allowedContentTypes: [
             'application/zip',
             'application/x-zip-compressed',
-            'application/x-7z-compressed',
-            'application/gzip',
-            'application/x-tar',
             'application/octet-stream',
           ],
-          maximumSizeInBytes: 500 * 1024 * 1024,
-          addRandomSuffix: true,
-          pathname: `packages/${safeName}`,
         };
       },
-      onUploadCompleted: async () => {},
+      onUploadCompleted: async () => {
+        // 一覧は Blob の list で取得するため DB 更新は不要
+      },
     });
     return NextResponse.json(jsonResponse);
   } catch (err) {
     const message = err instanceof Error ? err.message : 'アップロードに失敗しました';
+    console.error('[upload]', message, err);
     return NextResponse.json({ error: message }, { status: 400 });
   }
 }
