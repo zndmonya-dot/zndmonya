@@ -7,6 +7,7 @@ import { getStorageConfigError, isLocalMode, saveLocalFile } from '@/lib/storage
 export const runtime = 'nodejs';
 
 const BLOB_PREFIX = 'packages/';
+const TOKEN_TTL_MS = 2 * 60 * 60 * 1000;
 
 function isBlobClientRequest(contentType: string): boolean {
   return contentType.includes('application/json');
@@ -59,13 +60,21 @@ export async function POST(request: Request): Promise<NextResponse> {
     }
   }
 
+  const token = process.env.BLOB_READ_WRITE_TOKEN?.trim();
+  if (!token && body.type === 'blob.generate-client-token') {
+    return NextResponse.json(
+      { error: 'BLOB_READ_WRITE_TOKEN が未設定です。Vercel の Storage 設定を確認してください' },
+      { status: 503 },
+    );
+  }
+
   const { handleUpload } = await import('@vercel/blob/client');
 
   try {
     const jsonResponse = await handleUpload({
       body,
       request,
-      token: process.env.BLOB_READ_WRITE_TOKEN,
+      token,
       onBeforeGenerateToken: async (pathname) => {
         if (!pathname.startsWith(BLOB_PREFIX)) {
           throw new Error('無効なアップロード先です');
@@ -73,17 +82,12 @@ export async function POST(request: Request): Promise<NextResponse> {
 
         return {
           maximumSizeInBytes: MAX_UPLOAD_BYTES,
-          addRandomSuffix: true,
-          allowedContentTypes: [
-            'application/zip',
-            'application/x-zip-compressed',
-            'application/octet-stream',
-          ],
+          // ファイル名は makeParcelName() で一意化済み
+          addRandomSuffix: false,
+          validUntil: Date.now() + TOKEN_TTL_MS,
         };
       },
-      onUploadCompleted: async () => {
-        // 一覧は Blob の list で取得するため DB 更新は不要
-      },
+      onUploadCompleted: async () => {},
     });
     return NextResponse.json(jsonResponse);
   } catch (err) {

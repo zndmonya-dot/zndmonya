@@ -4,6 +4,8 @@
  * - Vercel 本番: @vercel/blob/client のクライアント直アップロード
  */
 
+import { getBlobAccess } from '@/lib/blob-access';
+
 const BLOB_PREFIX = 'packages/';
 const MULTIPART_THRESHOLD = 100 * 1024 * 1024;
 
@@ -18,8 +20,8 @@ function mapUploadError(err: unknown): Error {
   if (msg.includes('client token') || msg.includes('clientToken')) {
     return new Error('ストレージへの接続に失敗しました。Blob の設定を確認してください');
   }
-  if (msg.includes('content') && msg.includes('type')) {
-    return new Error('ファイル形式が許可されていません');
+  if (msg.includes('Access denied') || msg.includes('content type') || msg.includes('Pathname mismatch')) {
+    return new Error(`ストレージへのアップロードが拒否されました: ${msg}`);
   }
   return err;
 }
@@ -54,9 +56,9 @@ export async function uploadViaBlob(file: File, onProgress: (n: number) => void)
   try {
     const { upload } = await import('@vercel/blob/client');
     await upload(blobPathname(file.name), file, {
-      access: 'public',
+      access: getBlobAccess(),
       handleUploadUrl: '/api/upload',
-      contentType: file.type || 'application/zip',
+      contentType: 'application/zip',
       multipart: file.size > MULTIPART_THRESHOLD,
       onUploadProgress: ({ percentage }) => onProgress(percentage),
     });
