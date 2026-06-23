@@ -18,7 +18,7 @@ const noto = Noto_Sans_JP({
 
 export const metadata: Metadata = {
   title: 'LogiDesk',
-  description: '自宅PCと社内PC間のファイル転送',
+  description: '社内物流ポータル',
   robots: { index: false, follow: false },
 };
 

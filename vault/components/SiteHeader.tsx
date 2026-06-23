@@ -13,7 +13,7 @@ export function SiteHeader() {
           </span>
           <span>
             <span className="brand__name">LogiDesk</span>
-            <span className="brand__sub">ファイル転送センター</span>
+            <span className="brand__sub">拠点間配送</span>
           </span>
         </Link>
         <nav className="nav">

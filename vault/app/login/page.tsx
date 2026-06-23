@@ -18,10 +18,10 @@ export default function LoginPage({ searchParams }: { searchParams: { from?: str
           </span>
           <span>
             <span className="brand__name">LogiDesk</span>
-            <span className="brand__sub">ファイル転送センター</span>
+            <span className="brand__sub">拠点間配送</span>
           </span>
         </div>
-        <p className="login-subtitle">自宅PC ↔ 社内PC ファイル転送</p>
+        <p className="login-subtitle">拠点間配送システムへログイン</p>
         <LoginForm from={from} />
       </div>
     </div>

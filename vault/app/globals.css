@@ -18,10 +18,6 @@
   --radius: 10px;
   --radius-sm: 6px;
   --max: 860px;
-  --amazon-orange: #ff9900;
-  --amazon-orange-soft: #fff4e5;
-  --warehouse-gray: #d5dce6;
-  --warehouse-floor: #eef1f5;
   --primary-svg-color: #1d4ed8;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
@@ -51,7 +47,7 @@ h1, h2, h3, .ship-card__head h2 {
   letter-spacing: -0.01em;
 }
 
-.pill, .btn, .status-steps__label, .nav__status, .tracking-badge, .hub-loop__wh-banner {
+.pill, .btn, .status-steps__label, .nav__status, .hub-route__code, .tracking-badge {
   text-transform: uppercase;
 }
 
@@ -232,119 +228,142 @@ a:hover { color: var(--navy-mid); }
   display: none;
 }
 
-/* ── Hub loop (循環ルート) ── */
-.hub-loop {
-  position: relative;
-  width: 100%;
-  max-width: 380px;
-  height: 108px;
+/* ── Hub route (拠点間) ── */
+.hub-route {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 12px;
+  align-items: center;
   margin-top: 20px;
+  padding: 16px;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
 }
 
-.hub-loop__track {
+.hub-route__site {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  position: relative;
+}
+
+.hub-route__site--from { border-left: 3px solid var(--amber); }
+.hub-route__site--to { border-left: 3px solid var(--blue); text-align: right; align-items: flex-end; }
+
+.hub-route__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--amber);
+  margin-bottom: 4px;
+  box-shadow: 0 0 0 3px var(--amber-soft);
+}
+
+.hub-route__dot--dest {
+  background: var(--blue);
+  box-shadow: 0 0 0 3px var(--blue-soft);
+}
+
+.hub-route__code {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--ink-muted);
+}
+
+.hub-route__name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: var(--font-body), sans-serif;
+}
+
+.hub-route__role {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+}
+
+.hub-route__lane {
+  position: relative;
+  width: 80px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.hub-route__line {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.hub-loop__ellipse {
-  opacity: 0.55;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--amber), var(--blue));
+  transform: translateY(-50%);
   transition: opacity var(--duration-normal) var(--ease-out);
 }
 
-.hub-loop--active .hub-loop__ellipse {
-  opacity: 1;
-  animation: loop-dash 12s linear infinite;
-}
-
-@keyframes loop-dash {
-  to { stroke-dashoffset: -40; }
-}
-
-.hub-loop__vehicle {
-  color: var(--navy);
-  filter: drop-shadow(0 1px 2px rgba(15, 39, 68, 0.25));
-}
-
-.hub-loop--active .hub-loop__truck-cab {
-  fill: #ff9900;
-}
-
-.hub-loop--active .hub-loop__truck-body {
-  fill: #0f2744;
-}
-
-.hub-loop__wh {
+.hub-route__vehicle {
   position: absolute;
   top: 50%;
+  left: 8%;
   transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  width: 72px;
-  padding: 6px 4px 8px;
-  background: var(--warehouse-floor);
-  border: 1px solid var(--warehouse-gray);
-  border-radius: var(--radius-sm);
-  box-shadow: inset 0 -3px 0 var(--amber);
-  z-index: 2;
-}
-
-.hub-loop__wh--from { left: 0; }
-.hub-loop__wh--to { right: 0; box-shadow: inset 0 -3px 0 var(--blue); }
-
-.hub-loop__wh-banner {
-  font-size: 0.52rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #fff;
-  background: var(--navy);
-  padding: 2px 6px;
-  border-radius: 2px;
-  width: 100%;
-  text-align: center;
-}
-
-.hub-loop__wh-banner--dest {
-  background: var(--blue);
-}
-
-.hub-loop__wh-icon {
-  width: 28px;
-  height: 28px;
   color: var(--navy-mid);
-  margin-top: 2px;
+  animation: route-drive 7s var(--ease-in-out) infinite;
 }
 
-.hub-loop__wh-icon svg { width: 100%; height: 100%; }
-
-.hub-loop__wh-name {
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: none;
-  letter-spacing: 0;
-  font-family: var(--font-body), sans-serif;
-  line-height: 1.2;
+.hub-route--active .hub-route__vehicle {
+  animation-duration: 3.5s;
 }
 
-.hub-loop__wh-role {
-  font-size: 0.58rem;
-  font-weight: 600;
-  color: var(--ink-muted);
-  text-transform: none;
-  letter-spacing: 0;
-  font-family: var(--font-body), sans-serif;
+.hub-route--active .hub-route__line {
+  opacity: 1;
+  background: linear-gradient(90deg, var(--amber), var(--blue), var(--amber));
+  background-size: 200% 100%;
+  animation: route-line-flow 3.5s linear infinite;
+}
+
+@keyframes route-drive {
+  0%, 100% { left: 4%; opacity: 0.8; }
+  50% { left: calc(100% - 22px); opacity: 1; }
+}
+
+@keyframes route-line-flow {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
 }
 
 @media (max-width: 600px) {
-  .hub-loop {
-    height: 120px;
-    max-width: 100%;
+  .hub-route {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
-  .hub-loop__wh { width: 64px; }
+  .hub-route__lane {
+    width: 100%;
+    height: 24px;
+  }
+  .hub-route__vehicle {
+    left: 50%;
+    top: 4%;
+    transform: translateX(-50%);
+    animation: route-drive-vertical 7s var(--ease-in-out) infinite;
+  }
+  .hub-route--active .hub-route__vehicle {
+    animation-duration: 3.5s;
+  }
+  .hub-route__site--to { text-align: left; align-items: flex-start; }
+}
+
+@keyframes route-drive-vertical {
+  0%, 100% { top: 4%; left: 50%; transform: translateX(-50%); opacity: 0.8; }
+  50% { top: calc(100% - 22px); left: 50%; transform: translateX(-50%); opacity: 1; }
 }
 
 .illus-wrap {
@@ -490,71 +509,18 @@ a:hover { color: var(--navy-mid); }
   margin-bottom: 10px;
 }
 
-/* ── Ship cards (倉庫) ── */
+/* ── Ship cards ── */
 .ship-card {
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 0;
+  padding: 22px;
   box-shadow: var(--shadow);
   transition: box-shadow var(--duration-normal) var(--ease-out);
-  overflow: hidden;
 }
 
 .ship-card:hover {
   box-shadow: 0 6px 28px rgba(15, 39, 68, 0.1);
-}
-
-.ship-card--outbound {
-  border-top: 3px solid var(--amazon-orange);
-}
-
-.ship-card--inbound {
-  border-top: 3px solid var(--blue);
-}
-
-.ship-card__banner {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 22px;
-  background: linear-gradient(180deg, var(--warehouse-floor) 0%, var(--paper) 100%);
-  border-bottom: 1px solid var(--line);
-  background-image:
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 8px,
-      rgba(15, 39, 68, 0.03) 8px,
-      rgba(15, 39, 68, 0.03) 9px
-    ),
-    linear-gradient(180deg, var(--warehouse-floor) 0%, var(--paper) 100%);
-}
-
-.ship-card__banner-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-sm);
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  border: 1px solid var(--warehouse-gray);
-}
-
-.ship-card--outbound .ship-card__banner-icon {
-  background: var(--amazon-orange-soft);
-  color: var(--amber-deep);
-}
-
-.ship-card--inbound .ship-card__banner-icon {
-  background: var(--blue-soft);
-  color: var(--blue);
-}
-
-.ship-card__banner-icon svg { width: 20px; height: 20px; }
-
-.ship-card__body {
-  padding: 20px 22px 22px;
 }
 
 .ship-card__head {
@@ -563,12 +529,6 @@ a:hover { color: var(--navy-mid); }
   align-items: center;
   gap: 12px;
   margin-bottom: 16px;
-}
-
-.ship-card__banner .ship-card__head {
-  margin-bottom: 0;
-  flex: 1;
-  min-width: 0;
 }
 
 .ship-card__head h2 {
@@ -658,20 +618,12 @@ a:hover { color: var(--navy-mid); }
 
 /* ── Drop port ── */
 .drop-port {
-  border: 2px dashed rgba(15, 39, 68, 0.22);
+  border: 2px dashed rgba(15, 39, 68, 0.2);
   border-radius: var(--radius-sm);
   padding: 28px 24px;
   text-align: center;
   cursor: pointer;
-  background:
-    repeating-linear-gradient(
-      -45deg,
-      transparent,
-      transparent 6px,
-      rgba(245, 179, 1, 0.04) 6px,
-      rgba(245, 179, 1, 0.04) 12px
-    ),
-    var(--bg-panel);
+  background: var(--bg-panel);
   transition:
     border-color var(--duration-normal) var(--ease-out),
     background-color var(--duration-normal) var(--ease-out),
@@ -770,15 +722,7 @@ a:hover { color: var(--navy-mid); }
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   overflow: hidden;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 24px,
-      rgba(15, 39, 68, 0.025) 24px,
-      rgba(15, 39, 68, 0.025) 25px
-    ),
-    var(--paper);
+  background: var(--paper);
 }
 
 .parcel-item:hover {
