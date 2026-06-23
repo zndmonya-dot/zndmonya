@@ -8,8 +8,21 @@ export type FileEntry = {
   uploadedAt: string;
 };
 
+function isVercel(): boolean {
+  return process.env.VERCEL === '1';
+}
+
+/** ローカル packages/ — 開発環境のみ。Vercel 本番では Blob 必須 */
 export function isLocalMode(): boolean {
-  return !process.env.BLOB_READ_WRITE_TOKEN;
+  return !process.env.BLOB_READ_WRITE_TOKEN?.trim() && !isVercel();
+}
+
+export function getStorageConfigError(): string | null {
+  if (process.env.BLOB_READ_WRITE_TOKEN?.trim()) return null;
+  if (isVercel()) {
+    return '本番環境では Vercel Blob の接続が必要です（BLOB_READ_WRITE_TOKEN を設定してください）';
+  }
+  return null;
 }
 
 const PACKAGES_DIR = path.resolve(process.cwd(), 'packages');

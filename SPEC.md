@@ -27,7 +27,7 @@ zndmonya.com は**非公開**のファイルやり取りホームページです
 |------|------|------|
 | `VAULT_PASSWORD` | ○ | ログインパスワード |
 | `SESSION_SECRET` | ○ | セッション署名用 |
-| `BLOB_READ_WRITE_TOKEN` | 本番 | Vercel Blob（未設定時はローカル保存） |
+| `BLOB_READ_WRITE_TOKEN` | 本番必須 | Vercel Blob（未設定時はローカルのみ `packages/` に保存） |
 
 ## ローカル開発
 

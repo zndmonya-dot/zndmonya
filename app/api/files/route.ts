@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { isAuthenticated } from '@/lib/auth';
 import { listBlobFiles } from '@/lib/blob-storage';
-import { isLocalMode, listLocalFiles } from '@/lib/storage';
+import { getStorageConfigError, isLocalMode, listLocalFiles } from '@/lib/storage';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,6 +11,10 @@ export async function GET() {
   }
 
   try {
+    const storageError = getStorageConfigError();
+    if (storageError) {
+      return NextResponse.json({ error: storageError, files: [], mode: 'unconfigured' }, { status: 503 });
+    }
     const files = isLocalMode() ? listLocalFiles() : await listBlobFiles();
     return NextResponse.json({ files, mode: isLocalMode() ? 'local' : 'blob' });
   } catch (err) {

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { Readable } from 'stream';
 import { isAuthenticated } from '@/lib/auth';
 import { deleteBlobFile, downloadBlobFile } from '@/lib/blob-storage';
-import { deleteLocalFile, isLocalMode, openLocalFileStream } from '@/lib/storage';
+import { deleteLocalFile, getStorageConfigError, isLocalMode, openLocalFileStream } from '@/lib/storage';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,6 +18,11 @@ export async function GET(_request: Request, { params }: { params: { name: strin
   };
 
   try {
+    const storageError = getStorageConfigError();
+    if (storageError) {
+      return NextResponse.json({ error: storageError }, { status: 503 });
+    }
+
     if (isLocalMode()) {
       const { stream, size } = openLocalFileStream(name);
       return new NextResponse(Readable.toWeb(stream) as ReadableStream, {
@@ -42,6 +47,11 @@ export async function DELETE(_request: Request, { params }: { params: { name: st
   const name = decodeURIComponent(params.name);
 
   try {
+    const storageError = getStorageConfigError();
+    if (storageError) {
+      return NextResponse.json({ error: storageError }, { status: 503 });
+    }
+
     if (isLocalMode()) deleteLocalFile(name);
     else await deleteBlobFile(name);
     return NextResponse.json({ ok: true });

@@ -1,11 +1,16 @@
 import { NextResponse } from 'next/server';
 import type { HandleUploadBody } from '@vercel/blob/client';
 import { isAuthenticated } from '@/lib/auth';
-import { isLocalMode, saveLocalFile } from '@/lib/storage';
+import { getStorageConfigError, isLocalMode, saveLocalFile } from '@/lib/storage';
 
 export async function POST(request: Request): Promise<NextResponse> {
   if (!isAuthenticated()) {
     return NextResponse.json({ error: '認証が必要です' }, { status: 401 });
+  }
+
+  const storageError = getStorageConfigError();
+  if (storageError) {
+    return NextResponse.json({ error: storageError }, { status: 503 });
   }
 
   if (isLocalMode()) {
